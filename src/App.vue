@@ -1,47 +1,43 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+	<header class="flex-center flex-row mt-4">
+		<img
+			width="80"
+			height="80"
+			src="https://img.icons8.com/nolan/96/airplane-take-off.png"
+			alt="airplane-take-off"
+		/>
+		<h1 class="head-text gradient">Ovatu Aviation</h1>
+	</header>
+	<main>
+		<section class="flex justify-center mt-8">
+			<DropdownMenu @itemSelected="fetchSchedule" />
+		</section>
+	</main>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
-}
+<script setup>
+import DropdownMenu from './components/DropdownMenu.vue';
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
+const fetchSchedule = async (selectedItem) => {
+	try {
+		const departures = await fetch(
+			`https://airlabs.co/api/v9/schedules?dep_iata=${selectedItem.iata}&api_key=f410e654-34a3-48da-b5ae-b7a1ee186b2b`
+		);
+		const departuresData = await departures.json();
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
+		const arrivals = await fetch(
+			`https://airlabs.co/api/v9/schedules?arr_iata=${selectedItem.iata}&api_key=f410e654-34a3-48da-b5ae-b7a1ee186b2b`
+		);
+		const arrivalsData = await arrivals.json();
 
-  .logo {
-    margin: 0 2rem 0 0;
-  }
+		console.log(departuresData);
+		console.log(arrivalsData);
+	} catch (error) {
+		console.log('Error fetching data:', error);
+	}
+};
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
+// const fetchSchedule = (selectedItem) => {
+// 	console.log('Selected Item:', selectedItem);
+// };
+</script>
