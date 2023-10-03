@@ -1,25 +1,29 @@
 <template>
-	<header class="flex-center flex-row mt-4">
-		<img
-			width="80"
-			height="80"
-			src="https://img.icons8.com/nolan/96/airplane-take-off.png"
-			alt="airplane-take-off"
-		/>
-		<h1 class="font-heading head-text gradient">Ovatu Aviation</h1>
-	</header>
-	<main>
-		<section class="flex-center flex-col grow mt-8">
-			<h2 class="mb-4 text-xl">
-				Find today's flight schedules for the following Australian airports:
-			</h2>
+	<div class="app">
+		<header class="">
+			<nav class="flex flex-row grow mt-8">
+				<div class="flex flex-row items-center">
+					<img
+						width="40"
+						height="40"
+						src="https://img.icons8.com/nolan/96/airplane-take-off.png"
+						alt="airplane-take-off"
+					/>
+					<h1 class="font-heading text-xl gradient">Ovatu Aviation</h1>
+				</div>
+			</nav>
+			<h1 class="mt-12 mb-4 head-text">Australian Airport Timetables ✈️</h1>
+			<h3 class="mb-6">Today's departure and arrival schedules for your chosen airport.</h3>
 			<DropdownMenu @itemSelected="fetchSchedule" />
-		</section>
-		<section class="flex flex-col items-center m-8 gap-y-8 lg:flex-row lg:gap-x-8">
-			<Schedule v-if="showSchedule" title="departures" :data="departuresData" />
-			<Schedule v-if="showSchedule" title="arrivals" :data="arrivalsData" />
-		</section>
-	</main>
+		</header>
+		<main>
+			<section class="flex-center flex-col grow mt-8"></section>
+			<section class="flex flex-col items-center my-8 gap-y-8 lg:flex-row lg:gap-x-8">
+				<Schedule v-if="showSchedule" title="departures" :data="departuresData" />
+				<Schedule v-if="showSchedule" title="arrivals" :data="arrivalsData" />
+			</section>
+		</main>
+	</div>
 </template>
 
 <script setup>

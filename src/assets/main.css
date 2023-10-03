@@ -15,6 +15,9 @@
 }
 
 @layer components {
+	.app {
+		@apply max-w-7xl mx-auto;
+	}
 	.max-width {
 		@apply max-w-[1440px] mx-auto;
 	}
@@ -36,11 +39,11 @@
 	}
 
 	.custom-btn {
-		@apply rounded-lg border shadow-md max-w-[450px];
+		@apply cursor-pointer w-48 flex items-center justify-evenly border border-fuchsia-400 text-slate-800 px-4 py-2 rounded transition duration-300 hover:bg-fuchsia-400 hover:text-white;
 	}
 
 	.head-text {
-		@apply text-4xl font-extrabold leading-[1.15] sm:text-5xl;
+		@apply text-2xl font-extrabold leading-loose sm:text-3xl text-slate-800;
 	}
 
 	.gradient {

@@ -1,9 +1,6 @@
 <template>
 	<div class="relative">
-		<div
-			@click="toggleDropdown"
-			class="cursor-pointer w-48 flex items-center justify-evenly border border-fuchsia-400 text-slate-800 px-4 py-2 rounded transition duration-300 hover:bg-fuchsia-400 hover:text-white"
-		>
+		<div @click="toggleDropdown" class="custom-btn">
 			<button>{{ selected ? selected.text : 'Select an Airport' }}</button>
 			<i class="fa-solid fa-chevron-down"></i>
 		</div>

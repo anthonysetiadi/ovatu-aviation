@@ -6,7 +6,7 @@
 		<table class="w-full">
 			<thead>
 				<tr>
-					<th>Time</th>
+					<th>Date/Time</th>
 					<th>Flight</th>
 					<th>
 						{{ props.title === 'departures' ? 'Destination' : 'Origin' }}
@@ -48,6 +48,7 @@ import { ref, computed } from 'vue';
 
 const props = defineProps(['title', 'data']);
 
+/* Pagination Start */
 const currentPage = ref(1);
 const itemsPerPage = ref(10);
 
@@ -74,4 +75,5 @@ const prevPage = () => {
 		currentPage.value--;
 	}
 };
+/* Pagination End */
 </script>
