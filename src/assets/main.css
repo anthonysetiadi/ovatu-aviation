@@ -48,11 +48,15 @@
 	}
 
 	/* Table Styles */
-	.table-header {
+	th {
 		@apply px-3 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider;
 	}
 
-	.table-data {
-		@apply px-3 py-4 border-b border-gray-200;
+	td {
+		@apply px-3 py-4 border-b border-gray-200 text-left;
+	}
+
+	.pagination-controls {
+		@apply flex flex-row justify-between px-3 py-3 bg-gray-50;
 	}
 }
