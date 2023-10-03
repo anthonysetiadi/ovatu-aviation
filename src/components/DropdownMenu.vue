@@ -4,7 +4,7 @@
 			@click="toggleDropdown"
 			class="cursor-pointer w-48 flex items-center justify-evenly border border-fuchsia-400 text-slate-800 px-4 py-2 rounded transition duration-300 hover:bg-fuchsia-400 hover:text-white"
 		>
-			<button>Select an Airport</button>
+			<button>{{ selected ? selected.text : 'Select an Airport' }}</button>
 			<i class="fa-solid fa-chevron-down"></i>
 		</div>
 		<ul
@@ -43,7 +43,10 @@ function toggleDropdown() {
 	isOpen.value = !isOpen.value;
 }
 
+const selected = ref(null);
+
 function selectItem(item) {
+	selected.value = item;
 	emit('itemSelected', item);
 	isOpen.value = false;
 }

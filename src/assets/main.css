@@ -8,36 +8,51 @@
 	box-sizing: border-box;
 }
 
-/* START: General styles */
-.max-width {
-	@apply max-w-[1440px] mx-auto;
+@layer base {
+	html {
+		font-family: 'Poppins', sans-serif;
+	}
 }
 
-.padding-x {
-	@apply sm:px-16 px-6;
-}
+@layer components {
+	.max-width {
+		@apply max-w-[1440px] mx-auto;
+	}
 
-.padding-y {
-	@apply py-4;
-}
+	.padding-x {
+		@apply sm:px-16 px-6;
+	}
 
-.flex-center {
-	@apply flex items-center justify-center;
-}
+	.padding-y {
+		@apply py-4;
+	}
 
-.flex-between {
-	@apply flex justify-between items-center;
-}
+	.flex-center {
+		@apply flex items-center justify-center;
+	}
 
-.custom-btn {
-	@apply rounded-lg border shadow-md max-w-[450px];
-}
+	.flex-between {
+		@apply flex justify-between items-center;
+	}
 
-.head-text {
-	@apply text-4xl font-extrabold leading-[1.15] sm:text-5xl;
-}
+	.custom-btn {
+		@apply rounded-lg border shadow-md max-w-[450px];
+	}
 
-.gradient {
-	@apply bg-gradient-to-l from-violet-600 via-fuchsia-400 to-blue-600 bg-clip-text text-transparent;
+	.head-text {
+		@apply text-4xl font-extrabold leading-[1.15] sm:text-5xl;
+	}
+
+	.gradient {
+		@apply bg-gradient-to-l from-violet-600 via-fuchsia-400 to-blue-600 bg-clip-text text-transparent;
+	}
+
+	/* Table Styles */
+	.table-header {
+		@apply px-3 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider;
+	}
+
+	.table-data {
+		@apply px-3 py-4 border-b border-gray-200;
+	}
 }
-/* END: General styles */
