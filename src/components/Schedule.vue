@@ -46,7 +46,18 @@
 <script setup>
 import { ref, computed } from 'vue';
 
-const props = defineProps(['title', 'data']);
+const props = defineProps(['title', 'data', 'searchQuery']);
+
+/* Filter Data */
+const filteredData = computed(() => {
+	if (!props.searchQuery || !props.searchQuery.length) return props.data;
+
+	return props.data.filter((item) => {
+		return (
+			item.flight_iata && item.flight_iata.toLowerCase().includes(props.searchQuery.toLowerCase())
+		);
+	});
+});
 
 /* Pagination Start */
 const currentPage = ref(1);
@@ -55,13 +66,22 @@ const itemsPerPage = ref(10);
 const paginatedData = computed(() => {
 	if (!props.data || !props.data.length) return [];
 
+	// let filteredResults = props.data;
+	// if (props.searchQuery && props.searchQuery.length) {
+	// 	filteredResults = props.data.filter((item) => {
+	// 		return (
+	// 			item.flight_iata && item.flight_iata.toLowerCase().includes(props.searchQuery.toLowerCase())
+	// 		);
+	// 	});
+	// }
+
 	const start = (currentPage.value - 1) * itemsPerPage.value;
 	const end = start + itemsPerPage.value;
-	return props.data.slice(start, end);
+	return filteredData.value.slice(start, end);
 });
 
 const totalPages = computed(() => {
-	return Math.ceil((props.data ? props.data.length : 0) / itemsPerPage.value);
+	return Math.ceil(filteredData.value.length / itemsPerPage.value);
 });
 
 const nextPage = () => {

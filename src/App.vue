@@ -1,7 +1,7 @@
 <template>
 	<div class="app">
-		<header class="">
-			<nav class="flex flex-row grow mt-8">
+		<header>
+			<nav class="flex flex-row justify-between mt-8">
 				<div class="flex flex-row items-center">
 					<img
 						width="40"
@@ -11,6 +11,7 @@
 					/>
 					<h1 class="font-heading text-xl gradient">Ovatu Aviation</h1>
 				</div>
+				<Searchbar v-if="showSearch" v-model:searchQuery="searchQuery" />
 			</nav>
 			<h1 class="mt-12 mb-4 head-text">Australian Airport Timetables ✈️</h1>
 			<h3 class="mb-6">Today's departure and arrival schedules for your chosen airport.</h3>
@@ -19,8 +20,18 @@
 		<main>
 			<section class="flex-center flex-col grow mt-8"></section>
 			<section class="flex flex-col items-center my-8 gap-y-8 lg:flex-row lg:gap-x-8">
-				<Schedule v-if="showSchedule" title="departures" :data="departuresData" />
-				<Schedule v-if="showSchedule" title="arrivals" :data="arrivalsData" />
+				<Schedule
+					v-if="showSchedule"
+					title="departures"
+					:data="departuresData"
+					:searchQuery="searchQuery"
+				/>
+				<Schedule
+					v-if="showSchedule"
+					title="arrivals"
+					:data="arrivalsData"
+					:searchQuery="searchQuery"
+				/>
 			</section>
 		</main>
 	</div>
@@ -30,8 +41,11 @@
 import { ref } from 'vue';
 import DropdownMenu from './components/DropdownMenu.vue';
 import Schedule from './components/Schedule.vue';
+import Searchbar from './components/Searchbar.vue';
 
 const showSchedule = ref(false);
+const showSearch = ref(false);
+const searchQuery = ref('');
 
 const departuresData = ref([]);
 const arrivalsData = ref([]);
@@ -53,6 +67,7 @@ const fetchSchedule = async (selectedItem) => {
 		arrivalsData.value = arrivalsJSON.response.flatMap((item) => item);
 
 		showSchedule.value = true;
+		showSearch.value = true;
 	} catch (error) {
 		console.log('Error fetching data:', error);
 	}
