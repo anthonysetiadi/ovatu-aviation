@@ -5,7 +5,7 @@
 		<h3 class="mb-6">Today's departure and arrival schedules for your chosen airport.</h3>
 		<DropdownMenu @itemSelected="fetchSchedule" />
 
-		<main class="pb-8">
+		<main v-if="!isLoading" class="pb-8">
 			<section class="flex flex-row md:justify-end pt-3">
 				<Searchbar v-if="showSearch" v-model:searchQuery="searchQuery" />
 			</section>
@@ -27,6 +27,9 @@
 			</section>
 			<FlightInfo @closeModal="toggleModal" :showModal="showModal" :data="flightInfoData" />
 		</main>
+		<div v-if="isLoading">
+			<Spinner message="Retrieving airport information..." />
+		</div>
 	</div>
 </template>
 
@@ -37,11 +40,13 @@ import Schedule from './components/Schedule.vue';
 import Searchbar from './components/Searchbar.vue';
 import FlightInfo from './components/FlightInfo.vue';
 import Header from './components/Header.vue';
+import Spinner from './components/Spinner.vue';
 
 const showSchedule = ref(false);
 const showSearch = ref(false);
 const searchQuery = ref('');
 const showModal = ref(false);
+const isLoading = ref(false);
 
 const departuresData = ref([]);
 const arrivalsData = ref([]);
@@ -66,6 +71,7 @@ const fetchFlightInfo = async (flight_iata) => {
 };
 
 const fetchSchedule = async (selectedItem) => {
+	isLoading.value = true;
 	try {
 		const departures = await fetch(
 			`https://airlabs.co/api/v9/schedules?dep_iata=${selectedItem.iata}&api_key=f410e654-34a3-48da-b5ae-b7a1ee186b2b`
@@ -82,6 +88,8 @@ const fetchSchedule = async (selectedItem) => {
 		showSearch.value = true;
 	} catch (error) {
 		console.log('Error fetching data:', error);
+	} finally {
+		isLoading.value = false;
 	}
 };
 </script>

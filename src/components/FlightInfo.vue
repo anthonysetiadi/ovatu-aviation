@@ -65,5 +65,4 @@
 
 <script setup>
 const props = defineProps(['data', 'showModal']);
-
 </script>
