@@ -36,16 +36,16 @@
 					</button>
 				</div>
 				<!-- Modal body -->
-				<div class="p-6 grid grid-cols-2 divide-x text-gray-600">
+				<div class="text-sm md:text-base p-6 grid grid-cols-2 divide-x text-gray-600">
 					<div class="text-left leading-relaxed">
-						<h1 class="text-lg">{{ props.data.dep_iata }}</h1>
+						<h1 class="text-base md:text-lg">{{ props.data.dep_iata }}</h1>
 						<h2>{{ props.data.dep_name }}</h2>
                         <p>Terminal: {{ props.data.dep_terminal }}</p>
 						<p>Gate: {{ props.data.dep_gate }}</p>
 						<p>Departure Time: {{ props.data.dep_time }}</p>
 					</div>
 					<p class="text-right leading-relaxed">
-						<h1 class="text-lg">{{ props.data.arr_iata }}</h1>
+						<h1 class="text-base md:text-lg">{{ props.data.arr_iata }}</h1>
 						<h2>{{ props.data.arr_name }}</h2>
                         <p>Terminal: {{ props.data.arr_terminal }}</p>
 						<p>Gate: {{ props.data.arr_gate }}</p>

@@ -19,11 +19,8 @@
 
 @layer components {
 	/* General Styling */
-	.app {
-		@apply max-w-md md:max-w-lg lg:max-w-7xl mx-auto;
-	}
 	.max-width {
-		@apply max-w-[1440px] mx-auto;
+		@apply max-w-[1660px] mx-auto;
 	}
 
 	.padding-x {
@@ -44,7 +41,7 @@
 
 	/* Buttons and Headings */
 	.custom-btn {
-		@apply cursor-pointer w-48 flex items-center justify-evenly border border-fuchsia-400 text-slate-800 px-4 py-2 rounded transition duration-300 hover:bg-fuchsia-400 hover:text-white;
+		@apply cursor-pointer w-48 flex items-center justify-evenly border bg-white border-fuchsia-400 text-slate-800 px-4 py-2 rounded transition duration-300 hover:bg-fuchsia-400 hover:text-white;
 	}
 
 	.head-text {
@@ -56,16 +53,16 @@
 	}
 
 	.searchbar {
-		@apply flex border border-fuchsia-400 text-slate-800 rounded items-center;
+		@apply flex border border-fuchsia-400 text-slate-800 rounded items-center w-full md:w-fit;
 	}
 
 	/* Table Styles */
 	th {
-		@apply px-3 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider;
+		@apply px-3 py-3 border-b border-gray-400 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider;
 	}
 
 	td {
-		@apply px-3 py-4 border-b border-gray-200 text-left;
+		@apply px-2 py-3 md:py-4 border-b border-gray-400 text-left;
 	}
 
 	.pagination-controls {

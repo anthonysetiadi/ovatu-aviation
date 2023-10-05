@@ -1,25 +1,15 @@
 <template>
-	<div class="app">
-		<header>
-			<nav class="flex flex-row justify-between mt-8">
-				<div class="flex flex-row items-center">
-					<img
-						width="40"
-						height="40"
-						src="https://img.icons8.com/nolan/96/airplane-take-off.png"
-						alt="airplane-take-off"
-					/>
-					<h1 class="font-heading text-xl gradient">Ovatu Aviation</h1>
-				</div>
+	<div class="max-width padding-x">
+		<Header />
+		<h1 class="mt-12 mb-4 head-text">Australian Airport Timetables ✈️</h1>
+		<h3 class="mb-6">Today's departure and arrival schedules for your chosen airport.</h3>
+		<DropdownMenu @itemSelected="fetchSchedule" />
+
+		<main class="pb-8">
+			<section class="flex flex-row md:justify-end pt-3">
 				<Searchbar v-if="showSearch" v-model:searchQuery="searchQuery" />
-			</nav>
-			<h1 class="mt-12 mb-4 head-text">Australian Airport Timetables ✈️</h1>
-			<h3 class="mb-6">Today's departure and arrival schedules for your chosen airport.</h3>
-			<DropdownMenu @itemSelected="fetchSchedule" />
-		</header>
-		<main>
-			<section class="flex-center flex-col grow mt-8"></section>
-			<section class="flex flex-col items-center my-8 gap-y-8 lg:flex-row lg:gap-x-8">
+			</section>
+			<section class="flex flex-col items-center my-8 gap-y-8 xl:flex-row xl:gap-x-8">
 				<Schedule
 					v-if="showSchedule"
 					title="departures"
@@ -46,6 +36,7 @@ import DropdownMenu from './components/DropdownMenu.vue';
 import Schedule from './components/Schedule.vue';
 import Searchbar from './components/Searchbar.vue';
 import FlightInfo from './components/FlightInfo.vue';
+import Header from './components/Header.vue';
 
 const showSchedule = ref(false);
 const showSearch = ref(false);

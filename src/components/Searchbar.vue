@@ -3,7 +3,7 @@
 		<i class="fa-solid fa-magnifying-glass absolute px-2"></i>
 		<input
 			v-model="searchQuery"
-			class="px-8 py-2 bg-white rounded"
+			class="w-full md:w-fit px-8 py-2 bg-white rounded"
 			type="text"
 			placeholder="Search for a flight..."
 		/>

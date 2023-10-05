@@ -1,6 +1,8 @@
 <template>
-	<div class="w-full min-w-480 shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
-		<h2 class="text-center py-3 bg-slate-200 tracking-wider uppercase leading-4 font-bold">
+	<div
+		class="w-full shadow overflow-x-auto border-b border-gray-200 text-sm md:text-base rounded-lg grid grid-cols-1"
+	>
+		<h2 class="text-center py-3 bg-slate-200 tracking-wider uppercase font-bold">
 			{{ props.title }}
 		</h2>
 		<table class="w-full">
@@ -9,7 +11,12 @@
 					<th>Date/Time</th>
 					<th>Flight</th>
 					<th>
-						{{ props.title === 'departures' ? 'Destination' : 'Origin' }}
+						<!-- For mobile view -->
+						<span class="sm:hidden">{{ props.title === 'departures' ? 'Dest' : 'Ori' }}</span>
+						<!-- For larger than mobile view -->
+						<span class="hidden sm:inline">{{
+							props.title === 'departures' ? 'Destination' : 'Origin'
+						}}</span>
 					</th>
 					<th>Gate</th>
 					<th>Status</th>
@@ -19,7 +26,7 @@
 				<tr
 					v-for="item in paginatedData"
 					:key="item.flight_iata"
-					class="cursor-pointer bg-white hover:bg-gray-50"
+					class="cursor-pointer bg-white hover:bg-gray-50 text-xs md:text-base"
 					@click="$emit('selectedFlight', item.flight_iata)"
 				>
 					<td>
