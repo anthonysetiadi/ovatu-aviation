@@ -16,7 +16,12 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr v-for="item in paginatedData" :key="item.flight_iata" class="hover:bg-gray-50">
+				<tr
+					v-for="item in paginatedData"
+					:key="item.flight_iata"
+					class="cursor-pointer bg-white hover:bg-gray-50"
+					@click="$emit('selectedFlight', item.flight_iata)"
+				>
 					<td>
 						{{ props.title === 'departures' ? item.dep_time : item.arr_time }}
 					</td>
@@ -50,30 +55,22 @@ const props = defineProps(['title', 'data', 'searchQuery']);
 
 /* Filter Data */
 const filteredData = computed(() => {
-	if (!props.searchQuery || !props.searchQuery.length) return props.data;
-
 	return props.data.filter((item) => {
-		return (
-			item.flight_iata && item.flight_iata.toLowerCase().includes(props.searchQuery.toLowerCase())
-		);
+		// check for null flight_iata
+		if (!item.flight_iata) return false;
+		// if no search query, include item
+		if (!props.searchQuery || !props.searchQuery.length) return true;
+		// check if item's flight_iata includes the search query
+		return item.flight_iata.toLowerCase().includes(props.searchQuery.toLowerCase());
 	});
 });
 
-/* Pagination Start */
+/* Show Paginated Data */
 const currentPage = ref(1);
 const itemsPerPage = ref(10);
 
 const paginatedData = computed(() => {
 	if (!props.data || !props.data.length) return [];
-
-	// let filteredResults = props.data;
-	// if (props.searchQuery && props.searchQuery.length) {
-	// 	filteredResults = props.data.filter((item) => {
-	// 		return (
-	// 			item.flight_iata && item.flight_iata.toLowerCase().includes(props.searchQuery.toLowerCase())
-	// 		);
-	// 	});
-	// }
 
 	const start = (currentPage.value - 1) * itemsPerPage.value;
 	const end = start + itemsPerPage.value;
@@ -83,17 +80,14 @@ const paginatedData = computed(() => {
 const totalPages = computed(() => {
 	return Math.ceil(filteredData.value.length / itemsPerPage.value);
 });
-
 const nextPage = () => {
 	if (currentPage.value < totalPages.value) {
 		currentPage.value++;
 	}
 };
-
 const prevPage = () => {
 	if (currentPage.value > 1) {
 		currentPage.value--;
 	}
 };
-/* Pagination End */
 </script>

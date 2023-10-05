@@ -65,7 +65,7 @@
 	}
 
 	td {
-		@apply px-3 py-4 border-b border-gray-200 bg-white text-left;
+		@apply px-3 py-4 border-b border-gray-200 text-left;
 	}
 
 	.pagination-controls {

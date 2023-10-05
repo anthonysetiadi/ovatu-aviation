@@ -25,14 +25,17 @@
 					title="departures"
 					:data="departuresData"
 					:searchQuery="searchQuery"
+					@selectedFlight="fetchFlightInfo"
 				/>
 				<Schedule
 					v-if="showSchedule"
 					title="arrivals"
 					:data="arrivalsData"
 					:searchQuery="searchQuery"
+					@selectedFlight="fetchFlightInfo"
 				/>
 			</section>
+			<FlightInfo @closeModal="toggleModal" :showModal="showModal" :data="flightInfoData" />
 		</main>
 	</div>
 </template>
@@ -42,13 +45,34 @@ import { ref } from 'vue';
 import DropdownMenu from './components/DropdownMenu.vue';
 import Schedule from './components/Schedule.vue';
 import Searchbar from './components/Searchbar.vue';
+import FlightInfo from './components/FlightInfo.vue';
 
 const showSchedule = ref(false);
 const showSearch = ref(false);
 const searchQuery = ref('');
+const showModal = ref(false);
 
 const departuresData = ref([]);
 const arrivalsData = ref([]);
+const flightInfoData = ref({});
+
+const toggleModal = () => {
+	showModal.value = !showModal.value;
+};
+
+/* FETCH DATA */
+const fetchFlightInfo = async (flight_iata) => {
+	try {
+		const flightInfo = await fetch(
+			`https://airlabs.co/api/v9/flight?flight_iata=${flight_iata}&api_key=f410e654-34a3-48da-b5ae-b7a1ee186b2b`
+		);
+		const flightInfoJSON = await flightInfo.json();
+		flightInfoData.value = flightInfoJSON.response;
+		showModal.value = true;
+	} catch (error) {
+		console.log('Error fetching data:', error);
+	}
+};
 
 const fetchSchedule = async (selectedItem) => {
 	try {
@@ -56,14 +80,11 @@ const fetchSchedule = async (selectedItem) => {
 			`https://airlabs.co/api/v9/schedules?dep_iata=${selectedItem.iata}&api_key=f410e654-34a3-48da-b5ae-b7a1ee186b2b`
 		);
 		const departuresJSON = await departures.json();
-
 		departuresData.value = departuresJSON.response.flatMap((item) => item);
-
 		const arrivals = await fetch(
 			`https://airlabs.co/api/v9/schedules?arr_iata=${selectedItem.iata}&api_key=f410e654-34a3-48da-b5ae-b7a1ee186b2b`
 		);
 		const arrivalsJSON = await arrivals.json();
-
 		arrivalsData.value = arrivalsJSON.response.flatMap((item) => item);
 
 		showSchedule.value = true;
