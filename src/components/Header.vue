@@ -15,9 +15,9 @@
 				target="_blank"
 				rel="noopeener noreferrer"
 			>
-				<button type="button" class="custom-btn w-40 text-sm uppercase tracking-wider">
+				<button type="button" class="custom-btn w-fit space-x-1">
 					<i class="fa-brands fa-github"></i>
-					GitHub Repo
+					<span class="hidden md:inline uppercase tracking-wider text-sm">GitHub Repo</span>
 				</button>
 			</a>
 		</nav>
