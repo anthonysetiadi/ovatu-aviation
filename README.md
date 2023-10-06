@@ -11,12 +11,12 @@ Tech stack:
 
 An airport schedule app with the following features:
 
-- [ x ] Uses the Aviation API by [AirLabs](https://airlabs.co/)
-- [ x ] Fully responsive web app
-- [ x ] Users can select an airport from a list of major Australian airports
-- [ x ] Includes a schedule of all departures and arrivals for the selected airport for the current day
-- [ x ] Each list is searchable by flight name and paginated
-- [ x ] Clicking on a row in the schedule opens a modal to show more information about the flight
+- [x] Uses the Aviation API by [AirLabs](https://airlabs.co/)
+- [x] Fully responsive web app
+- [x] Users can select an airport from a list of major Australian airports
+- [x] Includes a schedule of all departures and arrivals for the selected airport for the current day
+- [x] Each list is searchable by flight name and paginated
+- [x] Clicking on a row in the schedule opens a modal to show more information about the flight
 
 ### Future Todos / Feature Ideas
 
